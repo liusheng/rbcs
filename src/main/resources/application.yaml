@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: rbcs
+  datasource:
+    url: jdbc:mysql://172.29.33.213:3306/rbcs
+    username: rbcs
+    password: rbcs
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 2000000
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+flyway:
+  baseline-on-migrate: true
+  locations: classpath:/db/migration
+
+aliyun:
+  accessKeyId: your-access-key-id
+  accessKeySecret: your-access-key-secret
+  regionId: your-region-id
+
+resilience4j:
+  retry:
+    instances:
+      financialTransactionRetry:
+        maxAttempts: 3 # 最大重试次数
+        waitDuration: 500ms # 重试间隔
+        enableExponentialBackoff: true # 是否启用指数退避策略
+        exponentialBackoffMultiplier: 2 # 指数退避乘数
+        ignoreExceptions: # 忽略这些异常，不进行重试
+          - org.springframework.web.client.HttpClientErrorException
+        retryExceptions: # 仅重试这些异常
+          - org.springframework.web.client.ResourceAccessException
+          - java.lang.RuntimeException
