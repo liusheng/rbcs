@@ -1,0 +1,37 @@
+replicaCount: 2
+
+image:
+  repository: your-docker-repo/spring-ack-demo
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+
+livenessProbe:
+  httpGet:
+    path: /balance/v1/transaction
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /balance/v1/transaction
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
