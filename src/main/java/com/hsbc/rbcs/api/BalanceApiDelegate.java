@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * A delegate to be called by the {@link BalanceApiController}}.
  * Implement this interface with a {@link org.springframework.stereotype.Service} annotated class.
  */
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T00:05:26.266543600+08:00[Asia/Shanghai]")
 public interface BalanceApiDelegate {
 
     default Optional<NativeWebRequest> getRequest() {
