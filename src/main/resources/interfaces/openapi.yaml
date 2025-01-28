@@ -16,8 +16,11 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                example: "Health check OK."
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
         '400':
           description: Invalid input
         '500':
@@ -97,6 +100,24 @@ components:
     TransactionRequest:
       type: object
       required:
+        - sourceAccount
+        - destAccount
+        - amount
+      properties:
+        sourceAccount:
+          type: string
+          minLength: 1
+          maxLength: 100
+        destAccount:
+          type: string
+          minLength: 1
+          maxLength: 100
+        amount:
+          type: number
+          format: double
+    TransactionResponse:
+      type: object
+      required:
         - transactionId
         - sourceAccount
         - destAccount
@@ -119,16 +140,6 @@ components:
           type: number
           format: double
         timestamp:
-          type: integer
-          format: int64
-    TransactionResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          minLength: 1
-          maxLength: 100
-        message:
           type: string
           minLength: 1
           maxLength: 100

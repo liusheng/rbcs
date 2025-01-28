@@ -1,6 +1,7 @@
 package com.hsbc.rbcs.api;
 
 import com.hsbc.rbcs.model.AccountBalance;
+import com.hsbc.rbcs.model.HealthCheck200Response;
 import com.hsbc.rbcs.model.TransactionRequest;
 import com.hsbc.rbcs.model.TransactionResponse;
 
@@ -27,7 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T22:23:39.956204700+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
 @Controller
 @RequestMapping("${openapi.realtimeBalanceTransaction.base-path:}")
 public class BalanceApiController implements BalanceApi {

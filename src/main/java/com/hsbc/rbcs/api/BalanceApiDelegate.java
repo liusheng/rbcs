@@ -1,6 +1,7 @@
 package com.hsbc.rbcs.api;
 
 import com.hsbc.rbcs.model.AccountBalance;
+import com.hsbc.rbcs.model.HealthCheck200Response;
 import com.hsbc.rbcs.model.TransactionRequest;
 import com.hsbc.rbcs.model.TransactionResponse;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ import javax.annotation.Generated;
  * A delegate to be called by the {@link BalanceApiController}}.
  * Implement this interface with a {@link org.springframework.stereotype.Service} annotated class.
  */
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T22:23:39.956204700+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
 public interface BalanceApiDelegate {
 
     default Optional<NativeWebRequest> getRequest() {
@@ -38,7 +39,7 @@ public interface BalanceApiDelegate {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"message\" : \"message\", \"status\" : \"status\" }";
+                    String exampleString = "{ \"amount\" : 0.8008281904610115, \"sourceAccount\" : \"sourceAccount\", \"destAccount\" : \"destAccount\", \"transactionId\" : \"transactionId\", \"timestamp\" : \"timestamp\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -56,11 +57,11 @@ public interface BalanceApiDelegate {
      *         or Service exception (status code 500)
      * @see BalanceApi#healthCheck
      */
-    default ResponseEntity<String> healthCheck() {
+    default ResponseEntity<HealthCheck200Response> healthCheck() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "\"Health check OK.\"";
+                    String exampleString = "{ \"status\" : \"OK\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

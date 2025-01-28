@@ -18,11 +18,8 @@ import javax.annotation.Generated;
  * TransactionRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T22:23:39.956204700+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
 public class TransactionRequest {
-
-  @JsonProperty("transactionId")
-  private String transactionId;
 
   @JsonProperty("sourceAccount")
   private String sourceAccount;
@@ -32,28 +29,6 @@ public class TransactionRequest {
 
   @JsonProperty("amount")
   private Double amount;
-
-  @JsonProperty("timestamp")
-  private Long timestamp;
-
-  public TransactionRequest transactionId(String transactionId) {
-    this.transactionId = transactionId;
-    return this;
-  }
-
-  /**
-   * Get transactionId
-   * @return transactionId
-  */
-  @NotNull @Size(min = 1, max = 100) 
-  @Schema(name = "transactionId", required = true)
-  public String getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(String transactionId) {
-    this.transactionId = transactionId;
-  }
 
   public TransactionRequest sourceAccount(String sourceAccount) {
     this.sourceAccount = sourceAccount;
@@ -112,25 +87,6 @@ public class TransactionRequest {
     this.amount = amount;
   }
 
-  public TransactionRequest timestamp(Long timestamp) {
-    this.timestamp = timestamp;
-    return this;
-  }
-
-  /**
-   * Get timestamp
-   * @return timestamp
-  */
-  @NotNull 
-  @Schema(name = "timestamp", required = true)
-  public Long getTimestamp() {
-    return timestamp;
-  }
-
-  public void setTimestamp(Long timestamp) {
-    this.timestamp = timestamp;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -140,27 +96,23 @@ public class TransactionRequest {
       return false;
     }
     TransactionRequest transactionRequest = (TransactionRequest) o;
-    return Objects.equals(this.transactionId, transactionRequest.transactionId) &&
-        Objects.equals(this.sourceAccount, transactionRequest.sourceAccount) &&
+    return Objects.equals(this.sourceAccount, transactionRequest.sourceAccount) &&
         Objects.equals(this.destAccount, transactionRequest.destAccount) &&
-        Objects.equals(this.amount, transactionRequest.amount) &&
-        Objects.equals(this.timestamp, transactionRequest.timestamp);
+        Objects.equals(this.amount, transactionRequest.amount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transactionId, sourceAccount, destAccount, amount, timestamp);
+    return Objects.hash(sourceAccount, destAccount, amount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TransactionRequest {\n");
-    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    sourceAccount: ").append(toIndentedString(sourceAccount)).append("\n");
     sb.append("    destAccount: ").append(toIndentedString(destAccount)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
-    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("}");
     return sb.toString();
   }

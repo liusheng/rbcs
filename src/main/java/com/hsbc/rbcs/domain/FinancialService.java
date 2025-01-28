@@ -25,7 +25,7 @@ public class FinancialService {
 
     @Retry(name = "financialTransactionRetry")
     @Transactional
-    public String transfer(String sourceAccountNumber, String destAccountNumber, BigDecimal amount) {
+    public Transaction transfer(String sourceAccountNumber, String destAccountNumber, BigDecimal amount) {
         Account sourceAccount = accountRepository.findByAccountNumberForUpdate(sourceAccountNumber);
         Account destAccount = accountRepository.findByAccountNumberForUpdate(destAccountNumber);
 
@@ -51,9 +51,7 @@ public class FinancialService {
         transaction.setAmount(amount);
         transaction.setTimestamp(LocalDateTime.now());
 
-        transactionRepository.save(transaction);
-
-        return "Transfer successful";
+        return transactionRepository.save(transaction);
     }
 
     @Retry(name = "accountQueryRetry")

@@ -18,51 +18,117 @@ import javax.annotation.Generated;
  * TransactionResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T22:23:39.956204700+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
 public class TransactionResponse {
 
-  @JsonProperty("status")
-  private String status;
+  @JsonProperty("transactionId")
+  private String transactionId;
 
-  @JsonProperty("message")
-  private String message;
+  @JsonProperty("sourceAccount")
+  private String sourceAccount;
 
-  public TransactionResponse status(String status) {
-    this.status = status;
+  @JsonProperty("destAccount")
+  private String destAccount;
+
+  @JsonProperty("amount")
+  private Double amount;
+
+  @JsonProperty("timestamp")
+  private String timestamp;
+
+  public TransactionResponse transactionId(String transactionId) {
+    this.transactionId = transactionId;
     return this;
   }
 
   /**
-   * Get status
-   * @return status
+   * Get transactionId
+   * @return transactionId
   */
-  @Size(min = 1, max = 100) 
-  @Schema(name = "status", required = false)
-  public String getStatus() {
-    return status;
+  @NotNull @Size(min = 1, max = 100) 
+  @Schema(name = "transactionId", required = true)
+  public String getTransactionId() {
+    return transactionId;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
   }
 
-  public TransactionResponse message(String message) {
-    this.message = message;
+  public TransactionResponse sourceAccount(String sourceAccount) {
+    this.sourceAccount = sourceAccount;
     return this;
   }
 
   /**
-   * Get message
-   * @return message
+   * Get sourceAccount
+   * @return sourceAccount
   */
-  @Size(min = 1, max = 100) 
-  @Schema(name = "message", required = false)
-  public String getMessage() {
-    return message;
+  @NotNull @Size(min = 1, max = 100) 
+  @Schema(name = "sourceAccount", required = true)
+  public String getSourceAccount() {
+    return sourceAccount;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setSourceAccount(String sourceAccount) {
+    this.sourceAccount = sourceAccount;
+  }
+
+  public TransactionResponse destAccount(String destAccount) {
+    this.destAccount = destAccount;
+    return this;
+  }
+
+  /**
+   * Get destAccount
+   * @return destAccount
+  */
+  @NotNull @Size(min = 1, max = 100) 
+  @Schema(name = "destAccount", required = true)
+  public String getDestAccount() {
+    return destAccount;
+  }
+
+  public void setDestAccount(String destAccount) {
+    this.destAccount = destAccount;
+  }
+
+  public TransactionResponse amount(Double amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Get amount
+   * @return amount
+  */
+  @NotNull 
+  @Schema(name = "amount", required = true)
+  public Double getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Double amount) {
+    this.amount = amount;
+  }
+
+  public TransactionResponse timestamp(String timestamp) {
+    this.timestamp = timestamp;
+    return this;
+  }
+
+  /**
+   * Get timestamp
+   * @return timestamp
+  */
+  @NotNull @Size(min = 1, max = 100) 
+  @Schema(name = "timestamp", required = true)
+  public String getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
   }
 
   @Override
@@ -74,21 +140,27 @@ public class TransactionResponse {
       return false;
     }
     TransactionResponse transactionResponse = (TransactionResponse) o;
-    return Objects.equals(this.status, transactionResponse.status) &&
-        Objects.equals(this.message, transactionResponse.message);
+    return Objects.equals(this.transactionId, transactionResponse.transactionId) &&
+        Objects.equals(this.sourceAccount, transactionResponse.sourceAccount) &&
+        Objects.equals(this.destAccount, transactionResponse.destAccount) &&
+        Objects.equals(this.amount, transactionResponse.amount) &&
+        Objects.equals(this.timestamp, transactionResponse.timestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(status, message);
+    return Objects.hash(transactionId, sourceAccount, destAccount, amount, timestamp);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TransactionResponse {\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+    sb.append("    sourceAccount: ").append(toIndentedString(sourceAccount)).append("\n");
+    sb.append("    destAccount: ").append(toIndentedString(destAccount)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("}");
     return sb.toString();
   }

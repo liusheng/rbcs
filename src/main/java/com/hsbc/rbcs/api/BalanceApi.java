@@ -6,6 +6,7 @@
 package com.hsbc.rbcs.api;
 
 import com.hsbc.rbcs.model.AccountBalance;
+import com.hsbc.rbcs.model.HealthCheck200Response;
 import com.hsbc.rbcs.model.TransactionRequest;
 import com.hsbc.rbcs.model.TransactionResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T22:23:39.956204700+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
 @Validated
 @Tag(name = "balance", description = "the balance API")
 public interface BalanceApi {
@@ -82,7 +83,7 @@ public interface BalanceApi {
         tags = { "BalanceApi" },
         responses = {
             @ApiResponse(responseCode = "200", description = "health check for balance service successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = HealthCheck200Response.class))
             }),
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "500", description = "Service exception")
@@ -93,7 +94,7 @@ public interface BalanceApi {
         value = "/balance/v1/health",
         produces = { "application/json" }
     )
-    default ResponseEntity<String> healthCheck(
+    default ResponseEntity<HealthCheck200Response> healthCheck(
         
     ) {
         return getDelegate().healthCheck();

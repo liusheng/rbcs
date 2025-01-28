@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -15,54 +16,33 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * AccountBalance
+ * HealthCheck200Response
  */
 
+@JsonTypeName("healthCheck_200_response")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-28T23:24:28.131266300+08:00[Asia/Shanghai]")
-public class AccountBalance {
+public class HealthCheck200Response {
 
-  @JsonProperty("account")
-  private String account;
+  @JsonProperty("status")
+  private String status;
 
-  @JsonProperty("balance")
-  private Double balance;
-
-  public AccountBalance account(String account) {
-    this.account = account;
+  public HealthCheck200Response status(String status) {
+    this.status = status;
     return this;
   }
 
   /**
-   * Get account
-   * @return account
-  */
-  @Size(min = 1, max = 100) 
-  @Schema(name = "account", required = false)
-  public String getAccount() {
-    return account;
-  }
-
-  public void setAccount(String account) {
-    this.account = account;
-  }
-
-  public AccountBalance balance(Double balance) {
-    this.balance = balance;
-    return this;
-  }
-
-  /**
-   * Get balance
-   * @return balance
+   * Get status
+   * @return status
   */
   
-  @Schema(name = "balance", required = false)
-  public Double getBalance() {
-    return balance;
+  @Schema(name = "status", example = "OK", required = false)
+  public String getStatus() {
+    return status;
   }
 
-  public void setBalance(Double balance) {
-    this.balance = balance;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   @Override
@@ -73,22 +53,20 @@ public class AccountBalance {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AccountBalance accountBalance = (AccountBalance) o;
-    return Objects.equals(this.account, accountBalance.account) &&
-        Objects.equals(this.balance, accountBalance.balance);
+    HealthCheck200Response healthCheck200Response = (HealthCheck200Response) o;
+    return Objects.equals(this.status, healthCheck200Response.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(account, balance);
+    return Objects.hash(status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AccountBalance {\n");
-    sb.append("    account: ").append(toIndentedString(account)).append("\n");
-    sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
+    sb.append("class HealthCheck200Response {\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }
