@@ -26,30 +26,35 @@ hpa:
 
 livenessProbe:
   httpGet:
-    path: /balance/v1/transaction
+    path: /balance/v1/health
     port: 8080
   initialDelaySeconds: 30
   periodSeconds: 10
 
 readinessProbe:
   httpGet:
-    path: /balance/v1/transaction
+    path: /balance/v1/health
     port: 8080
   initialDelaySeconds: 30
   periodSeconds: 10
 
 secret:
   enabled: true
-  username: "rbcs"
-  password: "rbcs"
+  db_url: jdbc:mysql://rm-bp17fdf923e79c2y7.rwlb.rds.aliyuncs.com/rbcs
+  db_username: "rbcs"
+  db_password: "<your-db-password>"
 
 env:
   SPRING_PROFILES_ACTIVE: "prod"
+  DB_URL:
+    secretKeyRef:
+      name: "{{ .Release.Name }}-db-secret"
+      key: db_url
   DB_USERNAME:
     secretKeyRef:
       name: "{{ .Release.Name }}-db-secret"
-      key: username
+      key: db_username
   DB_PASSWORD:
     secretKeyRef:
       name: "{{ .Release.Name }}-db-secret"
-      key: password
+      key: db_password
