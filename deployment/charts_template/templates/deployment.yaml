@@ -46,8 +46,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "{{ .Values.env.SPRING_PROFILES_ACTIVE }}"
             - name: DB_URL
               valueFrom:
                 secretKeyRef:
@@ -63,3 +61,18 @@ spec:
                 secretKeyRef:
                   name: "{{ .Release.Name }}-db-secret"
                   key: db_password
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: redis_host
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: redis_port
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secret
+                  key: redis_password

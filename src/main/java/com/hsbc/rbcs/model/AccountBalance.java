@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * AccountBalance
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T12:19:31.875053700+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T17:48:53.946189+08:00[Asia/Shanghai]")
 public class AccountBalance {
 
   @JsonProperty("account")

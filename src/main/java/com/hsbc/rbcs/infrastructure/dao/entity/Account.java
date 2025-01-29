@@ -3,12 +3,13 @@ package com.hsbc.rbcs.infrastructure.dao.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @Entity
 @Table(name = "accounts")
-public class Account {
+public class Account implements Serializable {
 
     @Version
     private Long version;

@@ -6,6 +6,8 @@ import com.hsbc.rbcs.infrastructure.dao.entity.Account;
 import com.hsbc.rbcs.infrastructure.dao.entity.Transaction;
 import com.hsbc.rbcs.infrastructure.dao.repository.AccountRepository;
 import com.hsbc.rbcs.infrastructure.dao.repository.TransactionRepository;
+import com.hsbc.rbcs.infrastructure.dao.service.AccountService;
+import com.hsbc.rbcs.infrastructure.dao.service.TransactionService;
 import com.hsbc.rbcs.model.AccountBalance;
 import com.hsbc.rbcs.model.TransactionRequest;
 import com.hsbc.rbcs.model.TransactionResponse;
@@ -38,17 +40,17 @@ public class BalanceApiIntegrationTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @MockBean
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Autowired
     private FinancialService financialService;
 
     @BeforeEach
     public void setUp() {
-        Mockito.reset(accountRepository, transactionRepository);
+        Mockito.reset(accountService, transactionService);
     }
 
     @Test
@@ -67,8 +69,8 @@ public class BalanceApiIntegrationTest {
         destAccount.setAccountNumber("456");
         destAccount.setBalance(BigDecimal.valueOf(100));
 
-        Mockito.when(accountRepository.findByAccountNumberForUpdate("123")).thenReturn(sourceAccount);
-        Mockito.when(accountRepository.findByAccountNumberForUpdate("456")).thenReturn(destAccount);
+        Mockito.when(accountService.findByAccountNumberForUpdate("123")).thenReturn(sourceAccount);
+        Mockito.when(accountService.findByAccountNumberForUpdate("456")).thenReturn(destAccount);
 
         Transaction transaction = new Transaction();
         transaction.setSourceAccount("123");
@@ -76,7 +78,7 @@ public class BalanceApiIntegrationTest {
         transaction.setAmount(BigDecimal.valueOf(100));
         transaction.setTransactionId(UUID.randomUUID().toString());
         transaction.setTimestamp(LocalDateTime.now());
-        Mockito.when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction);
+        Mockito.when(transactionService.save(any(Transaction.class))).thenReturn(transaction);
 
         TransactionRequest transactionRequest = new TransactionRequest();
         transactionRequest.setSourceAccount("123");
@@ -98,7 +100,7 @@ public class BalanceApiIntegrationTest {
         account.setAccountNumber("123");
         account.setBalance(BigDecimal.valueOf(100));
 
-        Mockito.when(accountRepository.findByAccountNumber("123")).thenReturn(account);
+        Mockito.when(accountService.findByAccountNumber("123")).thenReturn(account);
 
         mockMvc.perform(get("/balance/v1/query-account?account=123"))
                 .andExpect(status().isOk())
@@ -108,7 +110,7 @@ public class BalanceApiIntegrationTest {
 
     @Test
     public void testQueryBalance_NotFound() throws Exception {
-        Mockito.when(accountRepository.findByAccountNumber("123")).thenReturn(null);
+        Mockito.when(accountService.findByAccountNumber("123")).thenReturn(null);
 
         mockMvc.perform(get("/balance/v1/query-account?account=123"))
                 .andExpect(status().isNotFound());
@@ -120,8 +122,8 @@ public class BalanceApiIntegrationTest {
         account.setAccountNumber("123");
         account.setBalance(BigDecimal.valueOf(100));
 
-        Mockito.when(accountRepository.findByAccountNumberForUpdate("123")).thenReturn(null);
-        Mockito.when(accountRepository.save(any(Account.class))).thenReturn(account);
+        Mockito.when(accountService.findByAccountNumberForUpdate("123")).thenReturn(null);
+        Mockito.when(accountService.save(any(Account.class))).thenReturn(account);
 
         mockMvc.perform(post("/balance/v1/init-account")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -3,8 +3,8 @@ package com.hsbc.rbcs.domain;
 
 import com.hsbc.rbcs.infrastructure.dao.entity.Account;
 import com.hsbc.rbcs.infrastructure.dao.entity.Transaction;
-import com.hsbc.rbcs.infrastructure.dao.repository.AccountRepository;
-import com.hsbc.rbcs.infrastructure.dao.repository.TransactionRepository;
+import com.hsbc.rbcs.infrastructure.dao.service.AccountService;
+import com.hsbc.rbcs.infrastructure.dao.service.TransactionService;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,18 +16,17 @@ import java.util.UUID;
 
 @Service
 public class FinancialService {
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Retry(name = "financialTransactionRetry")
     @Transactional
     public Transaction transfer(String sourceAccountNumber, String destAccountNumber, BigDecimal amount) {
-        Account sourceAccount = accountRepository.findByAccountNumberForUpdate(sourceAccountNumber);
-        Account destAccount = accountRepository.findByAccountNumberForUpdate(destAccountNumber);
+        Account sourceAccount = accountService.findByAccountNumberForUpdate(sourceAccountNumber);
+        Account destAccount = accountService.findByAccountNumberForUpdate(destAccountNumber);
 
         if (sourceAccount == null || destAccount == null) {
             throw new RuntimeException("Account not found");
@@ -40,8 +39,8 @@ public class FinancialService {
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
         destAccount.setBalance(destAccount.getBalance().add(amount));
 
-        accountRepository.save(sourceAccount);
-        accountRepository.save(destAccount);
+        accountService.save(sourceAccount);
+        accountService.save(destAccount);
 
         String transactionId = UUID.randomUUID().toString();
         Transaction transaction = new Transaction();
@@ -51,26 +50,26 @@ public class FinancialService {
         transaction.setAmount(amount);
         transaction.setTimestamp(LocalDateTime.now());
 
-        return transactionRepository.save(transaction);
+        return transactionService.save(transaction);
     }
 
     @Retry(name = "accountQueryRetry")
     public Account queryByAccount(String account) {
-        return accountRepository.findByAccountNumber(account);
+        return accountService.findByAccountNumber(account);
     }
 
     @Transactional
     public Account initAccount(String account, Double balance) {
         Account result;
-        Account accountData = accountRepository.findByAccountNumberForUpdate(account);
+        Account accountData = accountService.findByAccountNumberForUpdate(account);
         if (accountData == null) {
             Account entity = new Account();
             entity.setBalance(BigDecimal.valueOf(balance));
             entity.setAccountNumber(account);
-            result = accountRepository.save(entity);
+            result = accountService.save(entity);
         } else {
             accountData.setBalance(BigDecimal.valueOf(balance));
-            result = accountRepository.save(accountData);
+            result = accountService.save(accountData);
         }
         return result;
     }

@@ -38,23 +38,16 @@ readinessProbe:
   initialDelaySeconds: 30
   periodSeconds: 10
 
-secret:
+
+# 阿里云数据库RDS
+mysql:
   enabled: true
   db_url: jdbc:mysql://rm-bp17fdf923e79c2y7.rwlb.rds.aliyuncs.com/rbcs
   db_username: "rbcs"
-  db_password: "<your-db-password>"
+  db_password: "your-mysql-password"
 
-env:
-  SPRING_PROFILES_ACTIVE: "prod"
-  DB_URL:
-    secretKeyRef:
-      name: "{{ .Release.Name }}-db-secret"
-      key: db_url
-  DB_USERNAME:
-    secretKeyRef:
-      name: "{{ .Release.Name }}-db-secret"
-      key: db_username
-  DB_PASSWORD:
-    secretKeyRef:
-      name: "{{ .Release.Name }}-db-secret"
-      key: db_password
+# 阿里云Redis服务
+redis:
+  host: "r-bp1bzu0g9it6n5zg76.redis.rds.aliyuncs.com"
+  port: "6379"
+  password: "your-redis-password"

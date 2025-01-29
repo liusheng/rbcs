@@ -6,6 +6,8 @@ import com.hsbc.rbcs.infrastructure.dao.entity.Account;
 import com.hsbc.rbcs.infrastructure.dao.entity.Transaction;
 import com.hsbc.rbcs.infrastructure.dao.repository.AccountRepository;
 import com.hsbc.rbcs.infrastructure.dao.repository.TransactionRepository;
+import com.hsbc.rbcs.infrastructure.dao.service.AccountService;
+import com.hsbc.rbcs.infrastructure.dao.service.TransactionService;
 import com.hsbc.rbcs.model.AccountBalance;
 import com.hsbc.rbcs.model.TransactionRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,17 +38,17 @@ public class BalanceApiPerformanceTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @MockBean
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Autowired
     private FinancialService financialService;
 
     @BeforeEach
     public void setUp() {
-        Mockito.reset(accountRepository, transactionRepository);
+        Mockito.reset(accountService, transactionService);
     }
 
     @Test
@@ -59,8 +61,8 @@ public class BalanceApiPerformanceTest {
         destAccount.setAccountNumber("user2");
         destAccount.setBalance(BigDecimal.valueOf(100000000));
 
-        Mockito.when(accountRepository.findByAccountNumberForUpdate("user1")).thenReturn(sourceAccount);
-        Mockito.when(accountRepository.findByAccountNumberForUpdate("user2")).thenReturn(destAccount);
+        Mockito.when(accountService.findByAccountNumberForUpdate("user1")).thenReturn(sourceAccount);
+        Mockito.when(accountService.findByAccountNumberForUpdate("user2")).thenReturn(destAccount);
 
         Transaction transaction = new Transaction();
         transaction.setSourceAccount("user1");
@@ -68,7 +70,7 @@ public class BalanceApiPerformanceTest {
         transaction.setAmount(BigDecimal.valueOf(100));
         transaction.setTransactionId(UUID.randomUUID().toString());
         transaction.setTimestamp(LocalDateTime.now());
-        Mockito.when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction);
+        Mockito.when(transactionService.save(any(Transaction.class))).thenReturn(transaction);
 
         TransactionRequest transactionRequest = new TransactionRequest();
         transactionRequest.setSourceAccount("user1");
