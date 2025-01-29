@@ -3,8 +3,8 @@ package com.hsbc.rbcs.domain;
 
 import com.hsbc.rbcs.infrastructure.dao.entity.Account;
 import com.hsbc.rbcs.infrastructure.dao.entity.Transaction;
-import com.hsbc.rbcs.infrastructure.dao.service.AccountRepository;
-import com.hsbc.rbcs.infrastructure.dao.service.TransactionRepository;
+import com.hsbc.rbcs.infrastructure.dao.repository.AccountRepository;
+import com.hsbc.rbcs.infrastructure.dao.repository.TransactionRepository;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

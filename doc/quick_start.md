@@ -1,18 +1,18 @@
 # 快速入门
 
-## 1. 基本接口功能验证
-### 1） 服务健康检查
+## 0. 基本接口功能验证
+### 0） 服务健康检查
 ```shell
 curl -v http://127.0.0.1:8080/balance/v1/health
 ```
 若服务正常启动则返回`200`状态码。
-### 2） 预置测试用户数据
+### 1） 预置测试用户数据
 ```shell
 curl -H "Content-Type: application/json" http://127.0.0.1:8080/balance/v1/init-account -d '{"account": "user1", "balance": 10000}'
 curl -H "Content-Type: application/json" http://127.0.0.1:8080/balance/v1/init-account -d '{"account": "user2", "balance": 20002}'
 ```
 
-### 3) 查询预置的用户数据
+### 2) 查询预置的用户数据
 测试用户1：
 ```shell
 curl -v http://127.0.0.1:8080/balance/v1/query-account?account=user1
@@ -31,7 +31,7 @@ curl -v http://127.0.0.1:8080/balance/v1/query-account?account=user2
 {"account":"user2","balance":20000.0}
 ```
 
-### 4) 用户之间转账交易
+### 3) 用户之间转账交易
 ```shell
 curl -H "Content-Type: application/json" http://127.0.0.1:8080/balance/v1/transaction -d '{"sourceAccount": "user2", "destAccount": "user1", "amount": 5000}'
 ```

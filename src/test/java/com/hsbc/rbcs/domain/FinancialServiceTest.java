@@ -2,8 +2,8 @@ package com.hsbc.rbcs.domain;
 
 import com.hsbc.rbcs.infrastructure.dao.entity.Account;
 import com.hsbc.rbcs.infrastructure.dao.entity.Transaction;
-import com.hsbc.rbcs.infrastructure.dao.service.AccountRepository;
-import com.hsbc.rbcs.infrastructure.dao.service.TransactionRepository;
+import com.hsbc.rbcs.infrastructure.dao.repository.AccountRepository;
+import com.hsbc.rbcs.infrastructure.dao.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,13 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "rbcs-microservice.fullname" . }}
+  name: {{ include "rbcs.fullname" . }}
   labels:
-    {{- include "my-microservice.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "rbcs.name" . }}
+    helm.sh/chart: {{ include "rbcs.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 8080
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
   selector:
-    {{- include "my-microservice.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "rbcs.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * TransactionRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T00:05:26.266543600+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T11:31:37.558517800+08:00[Asia/Shanghai]")
 public class TransactionRequest {
 
   @JsonProperty("sourceAccount")

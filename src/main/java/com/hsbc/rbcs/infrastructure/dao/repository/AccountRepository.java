@@ -1,4 +1,4 @@
-package com.hsbc.rbcs.infrastructure.dao.service;
+package com.hsbc.rbcs.infrastructure.dao.repository;
 
 import com.hsbc.rbcs.infrastructure.dao.entity.Account;
 import jakarta.persistence.LockModeType;
