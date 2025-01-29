@@ -2,9 +2,9 @@ spring:
   application:
     name: rbcs
   datasource:
-    url: ${DB_URL:jdbc:mysql://172.29.33.11:3306/rbcs}
-    username: ${DB_USERNAME:rbcas}
-    password: ${DB_PASSWORD:rbcsa}
+    url: ${DB_URL:jdbc:mysql://172.29.33.213:3306/rbcs}
+    username: ${DB_USERNAME:rbcs}
+    password: ${DB_PASSWORD:rbcs}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       minimum-idle: 5

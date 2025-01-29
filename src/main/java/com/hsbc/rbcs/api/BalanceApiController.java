@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T11:31:37.558517800+08:00[Asia/Shanghai]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T12:19:31.875053700+08:00[Asia/Shanghai]")
 @Controller
 @RequestMapping("${openapi.realtimeBalanceTransaction.base-path:}")
 public class BalanceApiController implements BalanceApi {
